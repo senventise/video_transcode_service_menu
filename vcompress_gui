@@ -15,7 +15,7 @@ kdialog --passivepopup "Converting "$1 1
 # original size
 size_o=`du -h $1 | cut -f1`
 # transcode with ffmpeg
-eval "ffmpeg -hwaccel cuda -i \""$1"\" -c:v hevc_nvenc -c:a libopus -crf 23""$1"\.opt.mp4\""
+eval "ffmpeg -hwaccel cuda -i \""$1"\" -c:v hevc_nvenc -c:a libopus \""$1".opt.mp4\""
 # size after transcoding
 size_a=`du -h $1.opt.mp4 | cut -f1`
 
