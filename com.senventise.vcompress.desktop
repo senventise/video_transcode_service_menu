@@ -8,4 +8,4 @@ X-KDE-Priority=TopLevel
 Name=Transcode video to HEVC
 Name[zh_CN]=将视频转码至HEVC
 Icon=browser-download
-Exec=/bin/bash ~/.local/bin/vcompress_gui %f
+Exec=vcompress_gui %f
