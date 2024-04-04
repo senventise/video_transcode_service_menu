@@ -1,6 +1,6 @@
 #!/bin/bash
 
-c=`mediainfo --Output="Video;%Format%" $1`
+c=`mediainfo --Output="Video;%Format%" "$1"`
 if [[ $c == "HEVC"  ]]
 then
     kdialog --passivepopup "Codec is HEVC already."
@@ -10,14 +10,14 @@ fi
 # exit on error
 set -e
 
-kdialog --passivepopup "Converting "$1 1
+kdialog --passivepopup "Converting $1" 1
 
 # original size
-size_o=`du -h $1 | cut -f1`
+size_o=`du -h "$1" | cut -f1`
 # transcode with ffmpeg
 eval "ffmpeg -hwaccel cuda -i \""$1"\" -c:v hevc_nvenc -c:a libopus \""$1".opt.mp4\""
 # size after transcoding
-size_a=`du -h $1.opt.mp4 | cut -f1`
+size_a=`du -h "$1.opt.mp4" | cut -f1`
 
 
 kdialog --yesno $size_o" => "$size_a"\nAre you sure?"
@@ -26,6 +26,6 @@ if [[ $? -ne 0 ]] ; then
 fi
 
 # replace
-trash $1
-mv $1".opt.mp4" $1
+trash "$1"
+mv "$1.opt.mp4" "$1"
 kdialog --passivepopup "Done" 1
